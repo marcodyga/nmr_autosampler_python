@@ -9,6 +9,7 @@ This repository contains the **Python** code for the "NMR-Killer".
 ## Third-party software
 
 The python scripts require [XAMPP](https://www.apachefriends.org/de/index.html) and a fully set up MySQL database (see the webinterface's Github page, to be added later).
+The automatic evaluation of NMR spectra (optional) uses the ACD NMR Processor Academic Edition (Version 12.01).
 
 The following libraries are required for this program:
 
@@ -30,7 +31,7 @@ This problem can be circumvented by using a precompiled package ("wheel") which 
 After downloading the .whl file, it can be installed using the following command:
 
 ```
-pip install pip install mysqlclient-[VERSION].whl
+pip install mysqlclient-[VERSION].whl
 ```
 
 ## Licence
