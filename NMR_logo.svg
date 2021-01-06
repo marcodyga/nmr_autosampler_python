@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="87mm"
+   height="87mm"
+   viewBox="0 0 87 87"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="NMR_logo.svg"
+   inkscape:export-filename="C:\xampp\htdocs\Autosampler\NMR_icon.png"
+   inkscape:export-xdpi="74.740227"
+   inkscape:export-ydpi="74.740227">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="414.04601"
+     inkscape:cy="154.82698"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="1"
+     fit-margin-left="1"
+     fit-margin-right="1"
+     fit-margin-bottom="1"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.46841427,-209.95515)">
+    <path
+       style="fill:#aba1ff;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 38.175595,241.81548 27.214284,4.34672 -40.821437,41.68005 c -12.227324,3.83881 -24.97264231,8.37692 -17.5758826,-14.27678 z"
+       id="path4510"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 61.421122,216.68007 8.0238095,271.29762 c -12.1167262,14.0726 0.7831307,28.52708 16.5446325,16.54464 l 55.562501,-55.2872 -11.339286,0.94494 5.858635,-9.63839 -12.85119,2.64584 z"
+       id="path4506"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccc" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4513"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:192px;line-height:1;font-family:'liberation sans';-inkscape-font-specification:'liberation sans Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,-0.1889881,-1.7008929)"><flowRegion
+         id="flowRegion4515"
+         style="font-size:192px;line-height:1"><rect
+           id="rect4517"
+           width="257.14285"
+           height="85.714287"
+           x="90"
+           y="997.51971"
+           style="font-size:192px;line-height:1" /></flowRegion><flowPara
+         id="flowPara4519"
+         style="font-size:192px;line-height:1">NMR</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4521"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'liberation sans';-inkscape-font-specification:'liberation sans Bold';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-opacity:1"
+       transform="matrix(0.26458333,0,0,0.26458333,0.56696422,23.056548)"><flowRegion
+         id="flowRegion4523"
+         style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-opacity:1"><rect
+           id="rect4525"
+           width="445"
+           height="277.85715"
+           x="25.714285"
+           y="875.37683"
+           style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-opacity:1" /></flowRegion><flowPara
+         id="flowPara4527"
+         style="font-size:133.33332825px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-opacity:1">N<flowSpan
+   style="fill:#dcdc00;fill-opacity:1"
+   id="flowSpan4529">M</flowSpan><flowSpan
+   id="flowSpan4541"
+   style="fill:#00c000;fill-opacity:1">R</flowSpan></flowPara></flowRoot>  </g>
+</svg>

@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Autosampler Satan</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>480</width>
+          <height>680</height>
+         </size>
+        </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <widget class="QWidget" name="tab_Table">
+         <attribute name="title">
+          <string>Table</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_Table">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_Status">
+         <attribute name="title">
+          <string>Status monitor</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_Status">
+            <item>
+             <widget class="QWidget" name="widget" native="true">
+              <widget class="QFrame" name="frame">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>360</y>
+                 <width>471</width>
+                 <height>91</height>
+                </rect>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QLabel" name="label_3">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>10</y>
+                  <width>181</width>
+                  <height>17</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Webservers&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_14">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>30</y>
+                  <width>101</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Apache:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_Apache">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>30</y>
+                  <width>101</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;loading...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_15">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>60</y>
+                  <width>101</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;MySQL:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_MySQL">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>60</y>
+                  <width>101</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;loading...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_open_xampp_control">
+                <property name="geometry">
+                 <rect>
+                  <x>300</x>
+                  <y>60</y>
+                  <width>160</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Open XAMPP control</string>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QFrame" name="frame_2">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>290</y>
+                 <width>471</width>
+                 <height>71</height>
+                </rect>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QLabel" name="label_2">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>10</y>
+                  <width>101</width>
+                  <height>17</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Spinsolve NMR&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_Spinsolve_NMRIP">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>10</y>
+                  <width>171</width>
+                  <height>17</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>The IP address and port of the Magritek software's websocket.</string>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;loading...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_13">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>30</y>
+                  <width>101</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Connection:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_Spinsolve_Connection">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>30</y>
+                  <width>101</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;loading...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_Spinsolve_Connect">
+                <property name="geometry">
+                 <rect>
+                  <x>300</x>
+                  <y>10</y>
+                  <width>80</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Connect</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_Spinsolve_Disconnect">
+                <property name="geometry">
+                 <rect>
+                  <x>380</x>
+                  <y>10</y>
+                  <width>80</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Disconnect</string>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QFrame" name="frame_3">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>471</width>
+                 <height>291</height>
+                </rect>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QLabel" name="label">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>10</y>
+                  <width>81</width>
+                  <height>17</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Autosampler&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_AS_COMPort">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>10</y>
+                  <width>171</width>
+                  <height>17</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>The virtual COM port of the Autosampler's Arduino Uno.</string>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;loading...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_AS_Connect">
+                <property name="geometry">
+                 <rect>
+                  <x>300</x>
+                  <y>10</y>
+                  <width>80</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Connect</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_AS_Disconnect">
+                <property name="geometry">
+                 <rect>
+                  <x>380</x>
+                  <y>10</y>
+                  <width>80</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Disconnect</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_9">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>30</y>
+                  <width>101</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Connection:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_AS_Connection">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>30</y>
+                  <width>101</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;loading...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_5">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>50</y>
+                  <width>101</width>
+                  <height>31</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Current status:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_AS_Status">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>50</y>
+                  <width>341</width>
+                  <height>31</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>The current status of the Autosampler.</string>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;loading...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_7">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>80</y>
+                  <width>101</width>
+                  <height>17</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Last contact:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_AS_LastContact">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>80</y>
+                  <width>341</width>
+                  <height>17</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>The time at which the PC last had contact to the Autosampler.</string>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;loading...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_10">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>100</y>
+                  <width>101</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Send command:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_ResetError">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>100</y>
+                  <width>171</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Resets the Errorcode of the Autosampler.</string>
+                </property>
+                <property name="text">
+                 <string>Reset errorcode</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_SendError">
+                <property name="geometry">
+                 <rect>
+                  <x>290</x>
+                  <y>100</y>
+                  <width>171</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Creates an Error (Errorcode: 9) and sends it to the Autosampler.</string>
+                </property>
+                <property name="text">
+                 <string>Send error to Autosampler</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_Pusher_PUSH">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>130</y>
+                  <width>171</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Sets the pusher to align with the hole for the NMR tube.</string>
+                </property>
+                <property name="text">
+                 <string>Set pusher to PUSH position</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_Pusher_PULL">
+                <property name="geometry">
+                 <rect>
+                  <x>290</x>
+                  <y>130</y>
+                  <width>171</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Slowly starts the air flow, pushing out an NMR tube from the spectrometer. If the air is currently running, it will be shut off without delay.</string>
+                </property>
+                <property name="text">
+                 <string>Set pusher to PULL position</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_Air_PUSH">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>160</y>
+                  <width>171</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Slowly starts the air flow, pushing out an NMR tube from the spectrometer.</string>
+                </property>
+                <property name="text">
+                 <string>Start airflow carefully</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_Air_VENT">
+                <property name="geometry">
+                 <rect>
+                  <x>290</x>
+                  <y>160</y>
+                  <width>171</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Slowly stops the airflow, carefully inserting a sample into the spectrometer.</string>
+                </property>
+                <property name="text">
+                 <string>Stop airflow carefully</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_Homing">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>190</y>
+                  <width>171</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Starts the sequence to find the &quot;zero position&quot; of the rotor, defined by a small flag on one of its spokes.</string>
+                </property>
+                <property name="text">
+                 <string>Run homing sequence</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_Buzz">
+                <property name="geometry">
+                 <rect>
+                  <x>290</x>
+                  <y>190</y>
+                  <width>171</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Tells the Autosampler to make a noise using the built-in buzzer.</string>
+                </property>
+                <property name="text">
+                 <string>Make noise</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_6">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>220</y>
+                  <width>54</width>
+                  <height>21</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Holder #</string>
+                </property>
+                <property name="margin">
+                 <number>0</number>
+                </property>
+               </widget>
+               <widget class="QLineEdit" name="lineEdit_Position">
+                <property name="geometry">
+                 <rect>
+                  <x>180</x>
+                  <y>220</y>
+                  <width>71</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Enter a holder number here.</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_MoveToPos">
+                <property name="geometry">
+                 <rect>
+                  <x>250</x>
+                  <y>220</y>
+                  <width>71</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Move to the position specified in the text box on the left. Does not home the rotor, make sure that it is properly aligned.</string>
+                </property>
+                <property name="text">
+                 <string>Move To</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_MeasureSample">
+                <property name="geometry">
+                 <rect>
+                  <x>320</x>
+                  <y>220</y>
+                  <width>71</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Inserts the sample at position specified in the text field on the left, and enters measuring mode. Does not actually start the measurement in Magritek's Spinsolve software.</string>
+                </property>
+                <property name="text">
+                 <string>Measure</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_ReturnSample">
+                <property name="geometry">
+                 <rect>
+                  <x>390</x>
+                  <y>220</y>
+                  <width>71</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Returns the sample, which is currently inside of the spectrometer, into the position specified on the left.</string>
+                </property>
+                <property name="text">
+                 <string>Return</string>
+                </property>
+               </widget>
+               <widget class="QLineEdit" name="lineEdit_Yell">
+                <property name="geometry">
+                 <rect>
+                  <x>120</x>
+                  <y>250</y>
+                  <width>271</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Enter a command here to send to the Autosampler!</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="btn_Yell">
+                <property name="geometry">
+                 <rect>
+                  <x>390</x>
+                  <y>250</y>
+                  <width>71</width>
+                  <height>25</height>
+                 </rect>
+                </property>
+                <property name="toolTip">
+                 <string>Send a command to the Autosampler!</string>
+                </property>
+                <property name="text">
+                 <string>Yell!</string>
+                </property>
+               </widget>
+              </widget>
+              <zorder>frame_3</zorder>
+              <zorder>frame_2</zorder>
+              <zorder>frame</zorder>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
