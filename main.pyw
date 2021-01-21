@@ -1,5 +1,7 @@
 import code
 import logging
+import time
+import sys
 from Autosampler import *
 from Spinsolve import *
 from MySQLReader import *
@@ -34,27 +36,21 @@ if not mysql_reader.is_apache_running():
 if not mysql_reader.is_mysqld_running():
     mysql_reader.start_mysqld()
 
+# wait up to 1 minute until a connection to mysql can be established
+for i in range(60):
+    conn, cur = mysql_reader.connect_db()
+    if conn is not None and cur is not None:
+        conn.close()
+        break
+    time.sleep(1)
+else:
+    sys.exit("Unable to connect to mysql server.")
+
 config = mysql_reader.read_config()
 
 autosampler = Autosampler(mysql_reader)
-autosampler.connect()
 
 spec = Spinsolve(mysql_reader)
-
-connected = spec.connect()
-i = 0
-# Wait for Spinsolve software to startup
-while not connected:
-    if i > 10:
-        logging.warning("No connection to Spinsolve software possible (timeout). Check if Spinsolve is running & restart Autosampler Satan.")
-        break
-    connected = False
-    i += 1
-    logging.info("Connection to the Spinsolve software failed, waiting for 10 seconds...")
-    time.sleep(10)
-    connected = spec.connect()
-if connected:
-    logging.info("Connection to the Spinsolve software successful!")
 
 queue = Queue(autosampler, spec, mysql_reader)
 

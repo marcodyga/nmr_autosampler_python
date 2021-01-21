@@ -58,6 +58,7 @@ class Spinsolve:
             self.socket.connect((nmr_ip, port))
             return True
         except:
+            logging.error("Failed to connect to Spinsolve!")
             return False
     
     def disconnect(self):

@@ -66,6 +66,7 @@ class Autosampler:
             else:
                 return False
         except:
+            logging.error("Failed to connect to autosampler!")
             return False
     
     def disconnect(self):

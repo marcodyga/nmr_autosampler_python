@@ -39,6 +39,13 @@ class Gui:
         
         self.window.show()
         self.splash.finish(self.window)
+        
+        # Try auto-connecting to autosampler and spectrometer.
+        self.autosampler.connect()
+        spinsolve_connector = threading.Thread(target=self.spinsolve_autoconnect, args=())
+        spinsolve_connector.daemon = True
+        spinsolve_connector.start()
+        
         self.app.exec()
     
     def setup(self):
@@ -122,6 +129,9 @@ class Gui:
                 
                 # work ourselves through the labels
                 # autosampler com port
+                if self.autosampler.port != config["ASPort"]:
+                    # oh look the port was changed in the meantime
+                    self.autosampler.port = config["ASPort"]
                 self.refresh_label(self.window.label_AS_COMPort, self.autosampler.port)
                 
                 # autosampler connection status
@@ -241,6 +251,26 @@ class Gui:
             messagebox.setText("Please enter a holder number.")
             messagebox.setStandardButtons(QtWidgets.QMessageBox.Ok)
             messagebox.exec()
+            
+    def spinsolve_autoconnect(self):
+        """
+        Tries to connect to Spinsolve a multiple times... in the case that it just takes a little 
+        more time to load...
+        """
+        connected = self.spinsolve.connect()
+        i = 0
+        # Wait for Spinsolve software to startup
+        while not connected:
+            if i > 10:
+                logging.warning("No connection to Spinsolve software possible (timeout). Check if Spinsolve is running & try again.")
+                break
+            connected = False
+            i += 1
+            logging.info("Connection to the Spinsolve software failed, waiting for 10 seconds...")
+            time.sleep(10)
+            connected = self.spinsolve.connect()
+        if connected:
+            logging.info("Connection to the Spinsolve software successful!")
     
         
 class QTextEditLogger(logging.Handler, QtCore.QObject):
