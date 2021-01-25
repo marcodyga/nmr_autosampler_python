@@ -8,7 +8,9 @@ This repository contains the **Python** code for the "NMR-Killer".
 
 ## Third-party software
 
-The python scripts require [XAMPP](https://www.apachefriends.org/de/index.html) and a fully set up MySQL database (see the webinterface's Github page, to be added later).
+On Windows machines, which this software is intended to run on, [Python 3](https://www.python.org/) must be installed first.
+
+The python scripts require [XAMPP](https://www.apachefriends.org/de/index.html) and a fully set up MySQL database (see the [webinterface's Github page](https://github.com/marcodyga/nmr_autosampler_webapp)).
 
 The automatic evaluation of NMR spectra (optional) uses the ACD NMR Processor Academic Edition (Version 12.01).
 
@@ -36,6 +38,12 @@ After downloading the .whl file, it can be installed using the following command
 ```
 pip install mysqlclient-[VERSION].whl
 ```
+
+## Setup
+
+Make sure to follow the instructions on the setup of the [webinterface](https://github.com/marcodyga/nmr_autosampler_webapp) first. The python script reads certain settings from the MySQL database, and will not work without them.
+
+To start the Autosampler GUI, first launch the *Spinsolve* software, and then launch `main.pyw`. 
 
 ## Licence
 
