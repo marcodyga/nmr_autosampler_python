@@ -279,9 +279,9 @@ class Queue:
                                 returned = False
                                 if as_status == 3:
                                     # Check for any modifications which may have occured during the measurement
-                                    queued_samples = cur.fetchall()
                                     cur.execute("SELECT * FROM samples WHERE Status = 'Queued' ORDER BY ID ASC")
-                                    if len(queued_samples) > 1 and queued_samples[1]['Holder'] == sample['Holder']:
+                                    queued_samples = cur.fetchall()
+                                    if len(queued_samples) >= 1 and queued_samples[0]['Holder'] == sample['Holder']:
                                         # next sample is the same holder as the current one, so don't remove
                                         # it from the spectrometer
                                         returned = True
