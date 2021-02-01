@@ -2,9 +2,9 @@
 
 ## Introduction
 
-The "NMR-Killer" is a 3D-printed autosampler for the [Magritek Spinsolve](https://magritek.com/products/spinsolve/) benchtop NMR spectrometer, based on Arduino, Python, and PHP.
+The "RotoMate" is a 3D-printed autosampler for the [Magritek Spinsolve](https://magritek.com/products/spinsolve/) benchtop NMR spectrometer, based on Arduino, Python, and PHP.
 
-This repository contains the **Python** code for the "NMR-Killer".
+This repository contains the **Python** code for the "RotoMate".
 
 ## Third-party software
 
