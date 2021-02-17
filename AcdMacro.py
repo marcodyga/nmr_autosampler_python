@@ -52,8 +52,8 @@ class AcdMacro:
             if conn is None or cur is None:
                 return False
             if self.method_id is not None and self.method_id != 0:
-                # Get config, method & peaks from DB
-                cur.execute("SELECT * FROM methods WHERE ID = " + str(self.method_id))
+                # Get config, method, nucleus & peaks from DB
+                cur.execute("SELECT * FROM methods INNER JOIN nuclei ON Methods.Nucleus=nuclei.Mass WHERE ID = " + str(self.method_id))
                 method = cur.fetchall()[0]
                 cur.execute("SELECT * FROM peaks WHERE method = " + str(method["ID"]) + " AND role = 0")
                 standard_peaks = cur.fetchall()
@@ -81,9 +81,9 @@ class AcdMacro:
                 methodLB = "0.2"
             else:
                 methodLB = str(method["LB"])
-
+                
             macro = ('ACD/MACRO <1D NMR> v12.01(14 Oct 2020 by "Marco")\r\n'
-                    'CheckDocument (Type = "FID"; Nucleus = "19F")\r\n'
+                    'CheckDocument (Type = "FID"; Nucleus = "' + method["FriendlyName"] + '")\r\n'
                     'ZeroFilling (PointsCount = "131072")\r\n'
                     'WindowFunction (Method = "Exponential"; LB = ' + methodLB + ')\r\n'
                     'FT (Operation = "Default")\r\n'
