@@ -238,17 +238,16 @@ class Queue:
                                         # successfully measured
                                         logging.debug("Measurement done.")
                                         cur.execute("UPDATE samples SET Status = 'Finished', Progress = 100 WHERE ID = " + str(sample['ID']))
-                                        # if this is a fluorine NMR, start the automatic evaluation using ACD specman
+                                        # start the automatic evaluation using ACD specman
                                         MacroSuccess = False
-                                        if sample['Protocol'] == "1D FLUORINE+":
-                                            while self.acd_macro_running == True:
-                                                # wait for the last macro to finish before running the next one.
-                                                time.sleep(0.5)
-                                            try:
-                                                MacroSuccess = self.fnmr_macro(sample['Name'], sample['Method'])
-                                            except:
-                                                logging.error("Error while evaluating sample " + sample["Name"] + ".")
-                                                self.acd_macro_running = False
+                                        while self.acd_macro_running == True:
+                                            # wait for the last macro to finish before running the next one.
+                                            time.sleep(0.5)
+                                        try:
+                                            MacroSuccess = self.fnmr_macro(sample['Name'], sample['Method'])
+                                        except:
+                                            logging.error("Error while evaluating sample " + sample["Name"] + ".")
+                                            self.acd_macro_running = False
                                         logging.info("Sample " + sample['Name'] + " was measured successfully.")
                                     else:
                                         # error when measuring sample
