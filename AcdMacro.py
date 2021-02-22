@@ -118,7 +118,11 @@ class AcdMacro:
             # Jcamp export
             macro += 'ExportDocument (Format = "JCAMP"; Dir = "' + config["NMRFolder"] + fname + '"; FileName = "' + fname1 + '.jdx"; IfExist = Overwrite; Setup=False)\r\n'
             # pdf export
-            macro += 'ExportReportToPDF (Dir = "' + config["NMRFolder"] + fname + '"; FileName = "' + fname1 + '.pdf"; ReportType = "Template"; TemplateFile = "' + os.getcwd() + '\\19f.sk2")\r\n'
+            sk2file = "19f.sk2" # 19F is the default (shows full spectrum)
+            if method is not None: 
+                if method["FriendlyName"] == "1H":
+                    sk2file = "1h.sk2" # in case of 1H, only show -0.5 to 10 ppm
+            macro += 'ExportReportToPDF (Dir = "' + config["NMRFolder"] + fname + '"; FileName = "' + fname1 + '.pdf"; ReportType = "Template"; TemplateFile = "' + os.getcwd() + '\\' + sk2file + '")\r\n'
             # Save as ESP
             macro += 'SaveDocument (Dir = "' + config["NMRFolder"] + fname + '"; FileName = "' + fname1 + '.esp"; IfExist = "Overwrite")\r\n'
             
@@ -130,8 +134,9 @@ class AcdMacro:
             # timeout of 20 seconds for specman to finish (otherwise there may be an error in the macro execution)
             fidfile = config["NMRFolder"] + fname + "/nmr_fid.dx"
             macrofile = os.getcwd() + "/makro.mcr"
-            logging.debug("Begin ACD macro")
-            macro_process = subprocess.Popen(specman_path + " /SP" + fidfile + " /m" + macrofile + " /nobanner")
+            command = specman_path + " /SP" + fidfile + " /m" + macrofile + " /nobanner"
+            logging.debug("Begin ACD macro with command: " + command)
+            macro_process = subprocess.Popen(command)
             timed_out = False
             for i in range(60): # 60 seconds
                 if macro_process.poll() is not None:  # process just ended
