@@ -549,10 +549,10 @@
                  </rect>
                 </property>
                 <property name="toolTip">
-                 <string>Sets the pusher to align with the hole for the NMR tube.</string>
+                 <string>Sets the slider to align with the hole for the NMR tube.</string>
                 </property>
                 <property name="text">
-                 <string>Set pusher to PUSH position</string>
+                 <string>Set slider to PUSH position</string>
                 </property>
                </widget>
                <widget class="QPushButton" name="btn_Pusher_PULL">
@@ -565,10 +565,10 @@
                  </rect>
                 </property>
                 <property name="toolTip">
-                 <string>Slowly starts the air flow, pushing out an NMR tube from the spectrometer. If the air is currently running, it will be shut off without delay.</string>
+                 <string>Retracts the slider to PULL position. If the air is currently running, it will be shut off without delay.</string>
                 </property>
                 <property name="text">
-                 <string>Set pusher to PULL position</string>
+                 <string>Set slider to PULL position</string>
                 </property>
                </widget>
                <widget class="QPushButton" name="btn_Air_PUSH">
