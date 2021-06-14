@@ -147,24 +147,39 @@ class Queue:
                                 cur.execute("UPDATE samples SET Status = 'Running' WHERE ID = " + str(sample['ID']))
                                 logging.info("Measuring sample " + sample['Name'] + " with ID = " + str(sample['ID']) + ".")
                                 as_status = int(self.autosampler.errorcode)
+                                should_insert = False
                                 inserted = False
-                                if same_sample and (previous_sample != sample["Holder"]):
-                                    logging.info("Removing waiting sample for Holder " + str(previous_sample) + ".")
-                                    returned = self.autosampler.return_sample(previous_sample)
-                                    time.sleep(2)
-                                    if not returned:
-                                        logging.error("Error while removing sample.")
-                                        break
+                                if not first_sample:
+                                    if same_sample:
+                                        # the same_sample flag is set after a measurement if the next sample has the same holder.
+                                        # this is checked to prevent the autosampler from removing the sample unnecessarily.
+                                        # in this case, the sample is still in the spectrometer, no need to re-insert it.
+                                        if previous_sample != sample["Holder"]:
+                                            # this block should be triggered if the sample number has changed over the course of a waiting time,
+                                            # for example: two measurments of holder 2 are scheduled by time, but someone adds another sample for holder 3
+                                            # in between - in this case we need to remove the sample for holder 2 before we try to add the sample for
+                                            # holder 3.
+                                            logging.info("Removing waiting sample for Holder " + str(previous_sample) + ".")
+                                            returned = self.autosampler.return_sample(previous_sample)
+                                            time.sleep(2)
+                                            if not returned:
+                                                logging.error("Error while removing sample.")
+                                                break
+                                            else:
+                                                should_insert = True
+                                        else:
+                                            # as expected, the sample is already inside, just continue without inserting the sample.
+                                            inserted = True
+                                            # reset the same_sample flag here, now it's "used" and the correct sample is in. the program
+                                            # can run as if a new sample was actually inserted now.
+                                            same_sample = False
                                     else:
-                                        inserted = self.autosampler.insert_sample(sample['Holder'], True)
-                                elif (not first_sample) and same_sample:
-                                    # check if the sample was measured before and is still in the spectrometer
-                                    # if this is the case, no need to re-insert it
-                                    inserted = True
-                                    # reset the same_sample flag here, now it's "used" and the correct sample is in. the program
-                                    # can run as if a new sample was actually inserted now.
-                                    same_sample = False
+                                        # most common case, we just want to measure the next sample in the queue
+                                        should_insert = True
                                 else:
+                                    # first sample of a queue always needs to be inserted
+                                    should_insert = True
+                                if should_insert:
                                     inserted = self.autosampler.insert_sample(sample['Holder'], not first_sample)
                                 # ok if insertion was successful, we can start measuring.
                                 if inserted:
