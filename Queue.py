@@ -127,8 +127,9 @@ class Queue:
                                 sample = running_samples[0]
                             else:
                                 # this is the normal case where no Running samples were found.
-                                # we get a list of all Queued samples sorted by ID, and set "sample" as the next queued sample.
-                                cur.execute("SELECT * FROM samples WHERE Status = 'Queued' ORDER BY ID ASC")
+                                # we get a list of all Queued samples sorted by StartDate, then ID, and set "sample" as the next queued sample.
+                                # MySQL will put those samples without StartDate (=NULL) first, for other sql implementations this should probably be changed.
+                                cur.execute("SELECT * FROM samples WHERE Status = 'Queued' ORDER BY StartDate ASC, ID ASC")
                                 queued_samples = cur.fetchall()
                                 if queued_samples:
                                     sample = queued_samples[0]
@@ -141,7 +142,8 @@ class Queue:
                                 # if no sample is queued, the QueueStat will be reset to 0, which will unhide
                                 # the buttons in the Table.
                                 cur.execute("UPDATE QueueAbort SET QueueStat = 0")
-                            else:
+                            elif sample["StartDate"] == None or sample["StartDate"] <= time.time():
+                                # Check if the StartDate is set, and if it is, whether it has already passed.
                                 cur.execute("UPDATE samples SET Status = 'Running' WHERE ID = " + str(sample['ID']))
                                 logging.info("Measuring sample " + sample['Name'] + " with ID = " + str(sample['ID']) + ".")
                                 as_status = int(self.autosampler.errorcode)
