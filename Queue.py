@@ -147,9 +147,17 @@ class Queue:
                                 cur.execute("UPDATE samples SET Status = 'Running' WHERE ID = " + str(sample['ID']))
                                 logging.info("Measuring sample " + sample['Name'] + " with ID = " + str(sample['ID']) + ".")
                                 as_status = int(self.autosampler.errorcode)
-                                # check if the page can connect to autosampler. if yes, use it; if not, just start measuring
                                 inserted = False
-                                if not first_sample and previous_sample == sample['Holder'] and same_sample:
+                                if same_sample and (previous_sample != sample["Holder"]):
+                                    logging.info("Removing waiting sample for Holder " + str(previous_sample) + ".")
+                                    returned = self.autosampler.return_sample(previous_sample)
+                                    time.sleep(2)
+                                    if not returned:
+                                        logging.error("Error while removing sample.")
+                                        break
+                                    else:
+                                        inserted = self.autosampler.insert_sample(sample['Holder'], True)
+                                elif (not first_sample) and same_sample:
                                     # check if the sample was measured before and is still in the spectrometer
                                     # if this is the case, no need to re-insert it
                                     inserted = True
@@ -255,6 +263,7 @@ class Queue:
                                         # error when measuring sample
                                         cur.execute("UPDATE samples SET Status = 'Failed' WHERE ID = " + str(sample['ID']))
                                         logging.info("Error when measuring the sample.")
+                                    previous_sample = sample["Holder"]
                                 else:
                                     # raise an error to the Autosampler, if it doesn't know the error itself
                                     timeout = 5 # seconds
