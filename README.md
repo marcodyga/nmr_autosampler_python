@@ -4,6 +4,8 @@
 
 The "RotoMate" is a 3D-printed autosampler for the [Magritek Spinsolve](https://magritek.com/products/spinsolve/) benchtop NMR spectrometer, based on Arduino, Python, and PHP.
 
+Our open-access manuscript with detailed build instructions and CAD data can be found under the following URL: https://doi.org/10.1016/j.ohx.2021.e00211
+
 This repository contains the **Python** code for the "RotoMate".
 
 ## Third-party software
