@@ -108,7 +108,7 @@ class MySQLReader:
         Returns sample table in nested tuple / dictionary format.
         """
         new_conn = False
-        if conn == None or cur == None:
+        if conn is None or cur is None:
             conn, cur = self.connect_db()
             if conn is None:
                 return None
@@ -133,7 +133,7 @@ class MySQLReader:
                                5 = 3x quickshim failed, we are aborting now
         """
         new_conn = False
-        if conn == None or cur == None:
+        if conn is None or cur is None:
             conn, cur = self.connect_db()
             if conn is None:
                 return None
@@ -156,7 +156,7 @@ class MySQLReader:
                                  1 = someone gave the order to start the queue.
         """
         new_conn = False
-        if conn == None or cur == None:
+        if conn is None or cur is None:
             conn, cur = self.connect_db()
             if conn is None:
                 return None
@@ -167,6 +167,36 @@ class MySQLReader:
         if new_conn:
             conn.close()
         return queueabort
+
+    def read_sample_properties(self, sampleid, conn=None, cur=None):
+        new_conn = False
+        if conn is None or cur is None:
+            conn, cur = self.connect_db()
+            if conn is None:
+                return None
+            new_conn = True
+        cur.execute("SELECT sample_properties.samplepropid, sample_properties.propid, protocol_properties.friendlyName,"
+                    "protocol_properties.xmlKey, sample_properties.strvalue FROM sample_properties INNER JOIN "
+                    "protocol_properties ON sample_properties.propid=protocol_properties.propid WHERE "
+                    "sample_properties.sampleid = %s",
+                    (sampleid,))
+        props = cur.fetchall()
+        if new_conn:
+            conn.close()
+        return props
+
+    def read_protocol(self, protocolid, conn=None, cur=None):
+        new_conn = False
+        if conn is None or cur is None:
+            conn, cur = self.connect_db()
+            if conn is None:
+                return None
+            new_conn = True
+        cur.execute("SELECT * FROM protocols WHERE protocolid = %s", (protocolid,))
+        protocol = cur.fetchone()
+        if new_conn:
+            conn.close()
+        return protocol
         
     def write_result(self, sample_name, result):
         conn, cur = self.connect_db()

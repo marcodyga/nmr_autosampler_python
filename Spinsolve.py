@@ -194,7 +194,7 @@ class Spinsolve:
         
         Arguments:
             name     -- name of the sample
-            protocol -- the protocol (proton, fluorine, etc)
+            protocol -- the protocol's xmlKey ("1D EXTENDED+", "1D FLUORINE+", etc)
             options  -- a dictionary containing the options for the measurement (which options 
                         need to be given depends on the protocol)
             solvent  -- the solvent

@@ -230,30 +230,15 @@ class Queue:
                                                     shimming['LastShim'] = t
                                     else:
                                         # Real sample
-                                        # 1D PROTON+ is called 1D EXTENDED+ in Spinsolve software.
-                                        if sample['Protocol'] == "1D PROTON+":
-                                            sample['Protocol'] = "1D EXTENDED+"
+                                        # get protocol from db
+                                        protocol = self.mysql_reader.read_protocol(sample['Protocol'], conn, cur)
                                         # filter the different options depending on the protocol
-                                        # let's keep the code simple for now, just do a manual implementation of
-                                        # proton and fluorine NMR.
                                         options = {}
-                                        if sample['Protocol'] == "1D EXTENDED+":
-                                            options['PulseAngle'] = "90"
-                                            options['Number'] = sample['Number']
-                                            options['RepetitionTime'] = sample['RepTime']
-                                            acquisition_times = [0.4, 0.8, 1.6, 3.2, 6.4]
-                                        if sample['Protocol'] == "1D FLUORINE+":
-                                            options['PulseAngle'] = "90"
-                                            options['Number'] = sample['Number']
-                                            options['RepetitionTime'] = sample['RepTime']
-                                            acquisition_times = [0.32, 0.64, 1.64, 3.2]
-                                        # in Magritek's software, repetition time is just acquisition time which is not recorded in the fid.
-                                        # always use the highest value possible for acquisition time.
-                                        for acquisition_time in sorted(acquisition_times, reverse=True):
-                                            if acquisition_time < sample['RepTime']:
-                                                break
-                                        options['AcquisitionTime'] = acquisition_time
-                                        success, aborted = self.spinsolve.measure_sample(sample['Name'], sample['Protocol'], options, sample['Solvent'])
+                                        # get options from property table
+                                        props = self.mysql_reader.read_sample_properties(sample['ID'], conn, cur)
+                                        for prop in props:
+                                            options[prop['xmlKey']] = prop['strvalue']
+                                        success, aborted = self.spinsolve.measure_sample(sample['Name'], protocol['xmlKey'], options, sample['Solvent'])
                                     if aborted:
                                         # Sample aborted
                                         cur.execute("UPDATE samples SET Status = 'Failed' WHERE ID = " + str(sample['ID']))
