@@ -188,8 +188,10 @@ class Queue:
                                         # Shimming sample
                                         logging.info("Begin shimming of type " + sample['SampleType'] + ".")
                                         cur.execute("UPDATE shimming SET Shimming = 1")
+                                        conn.close()  # close connection to mysql in preparation of lengthy operation
                                         success, aborted = self.spinsolve.shim(sample['SampleType'])
                                         if not aborted:
+                                            conn, cur = self.mysql_reader.connect_db()
                                             if sample['SampleType'] == "CheckShim":
                                                 # Shim as required: Checkshim, then up to 3x Quickshim.
                                                 if success:
@@ -228,6 +230,7 @@ class Queue:
                                                     logging.info(sample['SampleType'] + " successful.")
                                                     shimming['Shimming'] = 0
                                                     shimming['LastShim'] = t
+                                            conn.close()
                                     else:
                                         # Real sample
                                         # get protocol from db
@@ -238,7 +241,11 @@ class Queue:
                                         props = self.mysql_reader.read_sample_properties(sample['ID'], conn, cur)
                                         for prop in props:
                                             options[prop['xmlKey']] = prop['strvalue']
+                                        conn.close()  # close connection to mysql in preparation of lengthy operation
                                         success, aborted = self.spinsolve.measure_sample(sample['Name'], protocol['xmlKey'], options, sample['Solvent'])
+                                    
+                                    # reconnect to DB
+                                    conn, cur = self.mysql_reader.connect_db()
                                     if aborted:
                                         # Sample aborted
                                         cur.execute("UPDATE samples SET Status = 'Failed' WHERE ID = " + str(sample['ID']))
@@ -330,7 +337,7 @@ class Queue:
                             conn.close()
             except Exception as e:
                 logging.error("OMG Something TERRIBLE happened to the queue daemon!!!!! :-(")
-                traceback.print_exc()
+                logging.exception("")
             time.sleep(1)
 
     
@@ -386,7 +393,7 @@ class Queue:
                             conn.close()
             except:
                 logging.error("Something TERRIBLE happened to the progress daemon!!! :-(")
-                traceback.print_exc()
+                logging.exception("")
             time.sleep(1)
     
     def start_queue(self):

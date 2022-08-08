@@ -5,6 +5,7 @@ import threading
 import xml.etree.ElementTree as ET
 import traceback
 import logging
+from datetime import datetime
 from MySQLReader import *
 
 class Spinsolve:
@@ -31,6 +32,7 @@ class Spinsolve:
         self.options = False
         self.last_status = 0
         self.progress = 0
+        self.seconds_remaining = 0
         
         self.mysql_reader = mysql_reader
         
@@ -91,8 +93,10 @@ class Spinsolve:
             SN = root.find("StatusNotification")
             if SN != None:
                 # refresh the progress attribute, if available
-                if SN.find("Progress") != None:
-                    self.progress = SN.find("Progress").get("percentage")
+                Progress = SN.find("Progress")
+                if Progress != None:
+                    self.progress = Progress.get("percentage")
+                    self.seconds_remaining = int(Progress.get("secondsRemaining"))
                 # set a flag that the measurement was completed/successful. this will be reset by 
                 # the function which is waiting for this flag to be set.
                 if SN.find("Completed") != None:
@@ -112,8 +116,13 @@ class Spinsolve:
                 try:
                     message = self.socket.recv(4096)
                     message = message.decode("UTF-8")
+                    # for debugging purposes, log all messages coming form the socket
+                    #with open("socket_recv.log", "a") as f:
+                    #    print(str(datetime.now()) + " > ", file=f)
+                    #    print(str(message) + "\n", file=f)
                     try:
                         root = ET.fromstring(message)
+                        #logging.debug(message)
                         process_status_notification(root)
                     except ET.ParseError:
                         # meh some bullshit happend in the xml which was received from the spectrometer
@@ -134,6 +143,7 @@ class Spinsolve:
                     self.last_status = int(time.time())
                 except:
                     logging.warning("It appears that the Spinsolve software is not running, has crashed or was closed by the user. Aborting...")
+                    logging.exception("")
                     self.disconnect()
                     conn, cur = self.mysql_reader.connect_db()
                     if conn is not None and cur is not None:
@@ -169,6 +179,7 @@ class Spinsolve:
         i = 0
         while i < timeout:
             i += 1
+            timeout = i + (self.seconds_remaining + 60) * 10
             # did anyone press the abort button?
             queueabort = self.mysql_reader.read_queueabort()
             if queueabort['QueueStat'] == 0 and not aborted:
@@ -185,6 +196,7 @@ class Spinsolve:
                 break
             time.sleep(0.1)
         self.progress = 0    # reset progress
+        self.seconds_remaining = 0
         return retval, aborted
     
     def measure_sample(self, name, protocol, options, solvent="None", comment=""):
@@ -207,6 +219,7 @@ class Spinsolve:
         retval = False
         aborted = False
         self.progress = 0
+        self.seconds_remaining = 0
         # add the general stuff, which is needed for every protocol.
         # Sample name
         message  = self.message_set("<Sample>" + name + "</Sample>")
@@ -225,11 +238,12 @@ class Spinsolve:
         message += "</Message>"
         self.socket.send(message.encode())
         # now wait for the measurement to finish...
-        timeout = 60*2 # in minutes
+        timeout = 60*48 # in minutes
         timeout = timeout*10*60 # in 100 ms
         i = 0
         while i < timeout:
             i += 1
+            timeout = i + (self.seconds_remaining + 60) * 10
             # did anyone press the abort button?
             queueabort = self.mysql_reader.read_queueabort()
             if queueabort['QueueStat'] == 0 and not aborted:
@@ -255,7 +269,10 @@ class Spinsolve:
                         time.sleep(1)
                 break
             time.sleep(0.1)
+        else:
+            logging.error(f"Measurement failed due to timeout. i={i}, timeout={timeout}")
         self.progress = 0    # reset progress
+        self.seconds_remaining = 0
         return retval, aborted
     
     def abort(self):
